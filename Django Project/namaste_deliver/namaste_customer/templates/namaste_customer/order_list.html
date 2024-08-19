@@ -1,0 +1,87 @@
+{% extends 'namaste_customer/base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order List</title>
+    <style>
+        body {
+            background-color: #333;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+            max-height: calc(100vh - 200px);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            white-space: nowrap;
+        }
+        th, td {
+            border: 1px solid white;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #555;
+        }
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="table-container">
+        <form method="get">
+            {{ filter.form.as_p }}
+            <button type="submit">Apply Filters</button>
+        </form>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Created On</th>
+                    <th>Price</th>
+                    <th>Items</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in filter.qs %}
+                <tr>
+                    <td>{{ order.created_on }}</td>
+                    <td>{{ order.price }}</td>
+                    <td>
+                        {% for item in order.items.all %}
+                            {{ item.name }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{ order.name }}</td>
+                    <td>{{ order.email }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <footer>
+        Your footer content here
+    </footer>
+</body>
+</html>
+{% endblock content %}
+
+

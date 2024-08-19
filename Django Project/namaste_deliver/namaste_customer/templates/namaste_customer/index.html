@@ -1,0 +1,17 @@
+{% extends 'namaste_customer/base.html' %}
+
+{% block content %}
+<div class="container mb-5">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8 col-sm-12 offset-md-1 p-4 text-center">
+            <img src="/media/menu_images/namasteindia.png" alt="Namaste India Logo" style="max-width: 100%; height: auto;">
+        </div>
+    </div>
+    <div class="row justify-content-center mt-1">
+        <div class="card col-md-5 col-sm-12 offset-md-1 p-4 text-center" style="background-color: #000000;">
+            <h2 style="color: #ffffff; font-weight: bold;">Place an Order!</h2>
+            <a href="{% url 'order' %}" class="btn btn-outline-white">Order Now!</a>
+        </div>      
+    </div>
+</div>
+{% endblock content %}
